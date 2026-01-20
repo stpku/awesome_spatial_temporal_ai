@@ -154,6 +154,66 @@
       ],
       "format": "CSV",
       "paper": "https://arxiv.org/abs/1707.01926"
+    },
+    {
+      "name": "XXLTraffic",
+      "url": "https://arxiv.org/abs/2406.12693",
+      "description": "超大规模交通预测数据集，支持超长时序预测和动态交通场景。",
+      "time_range": "2018-2024",
+      "samples": "500M+",
+      "location": "Multiple Cities",
+      "type": "Traffic",
+      "task": [
+        "Ultra-Long Forecasting",
+        "Dynamic Scenarios"
+      ],
+      "format": "CSV, H5",
+      "paper": "https://arxiv.org/abs/2406.12693"
+    },
+    {
+      "name": "DynST",
+      "url": "https://openreview.net/forum?id=vXSCD3ToCS",
+      "description": "大规模动态道路网络数据集，支持可迁移交通预测（ICLR 2025）。",
+      "time_range": "2020-2024",
+      "samples": "50M+",
+      "location": "USA, China",
+      "type": "Traffic",
+      "task": [
+        "Transfer Learning",
+        "Dynamic Road Networks"
+      ],
+      "format": "Parquet",
+      "paper": "https://openreview.net/forum?id=vXSCD3ToCS"
+    },
+    {
+      "name": "UniFlow",
+      "url": "https://arxiv.org/abs/2411.12972",
+      "description": "统一城市时空流预测基础模型数据集，支持交通流和人流的统一预测。",
+      "time_range": "2019-2024",
+      "samples": "30M+",
+      "location": "Multiple Cities",
+      "type": "Flow",
+      "task": [
+        "Unified Flow Prediction",
+        "Foundation Model"
+      ],
+      "format": "CSV, Parquet",
+      "paper": "https://arxiv.org/abs/2411.12972"
+    },
+    {
+      "name": "STContext",
+      "url": "https://arxiv.org/abs/2501.03583",
+      "description": "多方面时空人群移动预测数据集，包含上下文特征（天气、事件等）。",
+      "time_range": "2022-2024",
+      "samples": "8M+",
+      "location": "Unknown",
+      "type": "Crowd Mobility",
+      "task": [
+        "Context-Aware Prediction",
+        "Crowd Flow"
+      ],
+      "format": "CSV",
+      "paper": "https://arxiv.org/abs/2501.03583"
     }
   ]
 }

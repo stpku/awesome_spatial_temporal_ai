@@ -93,6 +93,12 @@ def validate_datasets(data: dict) -> list:
             errors.append(f"datasets[{i}]: missing url")
         if "description" not in dataset:
             errors.append(f"datasets[{i}]: missing description")
+        
+        # Validate URL
+        if "url" in dataset:
+            url = dataset["url"]
+            if not url.startswith(("http://", "https://")):
+                errors.append(f"datasets[{i}]: invalid URL format")
     
     return errors
 
@@ -206,6 +212,7 @@ def main():
     else:
         print(f"All {file_count} files validated successfully!")
         sys.exit(0)
+
 
 if __name__ == "__main__":
     main()
