@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Media Channels",
+  "type": "object",
+  "properties": {
+    "wechat_publications": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/mediaItem" }
+    },
+    "newsletters": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/mediaItemWithUrl" }
+    }
+  },
+  "required": ["wechat_publications", "newsletters"],
+  "additionalProperties": false,
+  "definitions": {
+    "mediaItem": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "url": { "type": ["string", "null"], "format": "uri" }
+      },
+      "required": ["name"],
+      "additionalProperties": true
+    },
+    "mediaItemWithUrl": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "url": { "type": "string", "format": "uri" }
+      },
+      "required": ["name", "url"],
+      "additionalProperties": true
+    }
+  }
+}

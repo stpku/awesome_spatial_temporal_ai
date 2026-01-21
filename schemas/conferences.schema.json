@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Conferences",
+  "type": "object",
+  "properties": {
+    "conferences": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "full_name": { "type": ["string", "null"] },
+          "url": { "type": "string", "format": "uri" },
+          "date": { "type": ["string", "null"] },
+          "deadline": { "type": ["string", "null"] },
+          "focus": { "type": ["array", "null"], "items": { "type": "string" } },
+          "categories": { "type": ["array", "null"], "items": { "type": "string" } }
+        },
+        "required": ["name", "url"],
+        "additionalProperties": true
+      }
+    }
+  },
+  "required": ["conferences"],
+  "additionalProperties": false
+}

@@ -198,18 +198,30 @@ def main():
             print(f"[FAIL] {filename}")
 
     # Optional: JSON Schema validation for github_projects.json
+    # JSON Schema validations (if schemas exist)
+    schema_map = {
+        "github_projects.json": "github_projects.schema.json",
+        "latest_projects.json": "latest_projects.schema.json",
+        "conferences.json": "conferences.schema.json",
+        "journals.json": "journals.schema.json",
+        "media_channels.json": "media_channels.schema.json",
+        "datasets.json": "datasets.schema.json",
+        "papers.json": "papers.schema.json",
+    }
     try:
-        schema_path = SCHEMA_DIR / "github_projects.schema.json"
-        projects_path = DATA_DIR / "github_projects.json"
-        if schema_path.exists() and projects_path.exists():
-            import jsonschema  # type: ignore
-            schema = json.loads(schema_path.read_text(encoding="utf-8"))
-            projects = json.loads(projects_path.read_text(encoding="utf-8"))
-            jsonschema.validate(projects, schema)
-            print("[OK]   github_projects.json (schema)\n")
+        import jsonschema  # type: ignore
+        for data_file, schema_file in schema_map.items():
+            schema_path = SCHEMA_DIR / schema_file
+            data_path = DATA_DIR / data_file
+            if schema_path.exists() and data_path.exists():
+                schema = json.loads(schema_path.read_text(encoding="utf-8"))
+                payload = json.loads(data_path.read_text(encoding="utf-8"))
+                jsonschema.validate(payload, schema)
+                print(f"[OK]   {data_file} (schema)")
+        print()
     except Exception as e:
-        all_errors.append(f"github_projects.json (schema): {e}")
-        print("[FAIL] github_projects.json (schema)\n")
+        all_errors.append(f"schema validation: {e}")
+        print("[FAIL] schema validation\n")
     
     print()
     
