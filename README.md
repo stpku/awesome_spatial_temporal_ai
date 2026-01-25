@@ -1,10 +1,10 @@
 # Awesome Spatio-Temporal AI
 
 <p align="left">
-  <img alt="entries" src="https://img.shields.io/endpoint?url=https://stpku.github.io/awesome_spatial_tempoal_ai/reports/badges/entries.json" />
-  <img alt="broken links" src="https://img.shields.io/endpoint?url=https://stpku.github.io/awesome_spatial_tempoal_ai/reports/badges/broken_rate.json" />
-  <img alt="stale" src="https://img.shields.io/endpoint?url=https://stpku.github.io/awesome_spatial_tempoal_ai/reports/badges/stale.json" />
-  <img alt="last update" src="https://img.shields.io/endpoint?url=https://stpku.github.io/awesome_spatial_tempoal_ai/reports/badges/updated.json" />
+  <img alt="entries" src="https://img.shields.io/endpoint?url=https://stpku.github.io/awesome_spatial_temporal_ai/reports/badges/entries.json" />
+  <img alt="broken links" src="https://img.shields.io/endpoint?url=https://stpku.github.io/awesome_spatial_temporal_ai/reports/badges/broken_rate.json" />
+  <img alt="stale" src="https://img.shields.io/endpoint?url=https://stpku.github.io/awesome_spatial_temporal_ai/reports/badges/stale.json" />
+  <img alt="last update" src="https://img.shields.io/endpoint?url=https://stpku.github.io/awesome_spatial_temporal_ai/reports/badges/updated.json" />
   
 </p>
 

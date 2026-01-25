@@ -1,0 +1,39 @@
+name: Update Stars
+
+on:
+  schedule:
+    - cron: '0 0 * * 1'  # 每周一 00:00 UTC
+  workflow_dispatch:
+
+jobs:
+  update-stars:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Update stars (GitHub REST API)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python tools/update_stars.py || true
+
+      - name: Commit stars changes (optional)
+        if: ${{ env.GITEE_TOKEN != '' }}
+        env:
+          GITEE_TOKEN: ${{ secrets.GITEE_TOKEN }}
+        run: |
+          git config user.name "gitee-ci"
+          git config user.email "ci@gitee.com"
+          git add awesomelist/github_projects.json
+          if git diff --cached --quiet; then
+            echo "No changes"
+          else
+            git commit -m "chore(ci): weekly stars refresh"
+            git push
+          fi
