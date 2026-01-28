@@ -1,6 +1,83 @@
 {
   "papers": [
     {
+      "title": "Trustworthy Evaluation of Robotic Manipulation: A New Benchmark and AutoEval Methods",
+      "authors": "Unknown",
+      "year": 2026,
+      "venue": "arXiv",
+      "citations": 0,
+      "url": "http://arxiv.org/abs/2601.18723v1",
+      "description": "强调评测可信与自动化，契合 World Model 时代“模型会不会做、做得稳不稳”的核心痛点；对具身智能在复杂环境（含户外地形）评测方法有启发。",
+      "task": [],
+      "publisher": "Unknown"
+    },
+    {
+      "title": "TC-IDM: Grounding Video Generation for Executable Zero-shot Robot Motion",
+      "authors": "Unknown",
+      "year": 2026,
+      "venue": "arXiv",
+      "citations": 0,
+      "url": "http://arxiv.org/abs/2601.18323v1",
+      "description": "把视频生成与动作可执行性绑定，为“从生成到控制”的闭环提供路径；可迁移到**无人机巡检/野外机器人**的动作先验生成。",
+      "task": [],
+      "publisher": "Unknown"
+    },
+    {
+      "title": "CASSANDRA: Programmatic and Probabilistic Learning and Inference for Stochastic World Modeling",
+      "authors": "Unknown",
+      "year": 2026,
+      "venue": "arXiv",
+      "citations": 0,
+      "url": "http://arxiv.org/abs/2601.18620v1",
+      "description": "将“世界知识+概率程序”纳入世界模型学习/推断框架，适合表达复杂语义与不确定性，利好**城市运营/供应链/灾害演化**等可模拟决策场景。",
+      "task": [],
+      "publisher": "Unknown"
+    },
+    {
+      "title": "Adaptive Domain Shift in Diffusion Models for Cross-Modality Image Translation",
+      "authors": "Unknown",
+      "year": 2026,
+      "venue": "arXiv",
+      "citations": 0,
+      "url": "http://arxiv.org/abs/2601.18623v1",
+      "description": "不再假设单一全局域映射，转向更细粒度的域偏移建模；对 SAR↔光学、昼夜/季节转换等**遥感跨传感器生成**尤其关键。",
+      "task": [],
+      "publisher": "Unknown"
+    },
+    {
+      "title": "Revisiting Aerial Scene Classification on the AID Benchmark",
+      "authors": "Unknown",
+      "year": 2026,
+      "venue": "arXiv",
+      "citations": 0,
+      "url": "http://arxiv.org/abs/2601.18263v1",
+      "description": "对经典航拍分类基准进行系统复盘，有助于识别“看似提升、实则过拟合/协议泄漏”的风险，适合作为**遥感分类的健康体检**参考。",
+      "task": [],
+      "publisher": "Unknown"
+    },
+    {
+      "title": "Multi-Perspective Subimage CLIP with Keyword Guidance for Remote Sensing Image-Text Retrieval",
+      "authors": "Unknown",
+      "year": 2026,
+      "venue": "arXiv",
+      "citations": 0,
+      "url": "http://arxiv.org/abs/2601.18190v1",
+      "description": "通过多视角子图对齐与关键词约束，缓解遥感场景“全局粗对齐”问题，更贴近**地物实例/局部结构**检索需求。",
+      "task": [],
+      "publisher": "Unknown"
+    },
+    {
+      "title": "DisasterInsight: A Multimodal Benchmark for Function-Aware and Grounded Disaster Assessment",
+      "authors": "Unknown",
+      "year": 2026,
+      "venue": "arXiv",
+      "citations": 0,
+      "url": "http://arxiv.org/abs/2601.18493v1",
+      "description": "把“看懂灾害”从图像级标签推进到**功能/设施层面的可定位、可追溯**评估，为遥感 VLM 的真实应急落地补齐评测缺口。",
+      "task": [],
+      "publisher": "Unknown"
+    },
+    {
       "title": "Cosmos Policy: Fine-Tuning Video Models for Visuomotor Control and Planning",
       "authors": "Unknown",
       "year": 2026,
