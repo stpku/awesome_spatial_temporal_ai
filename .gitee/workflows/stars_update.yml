@@ -21,7 +21,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          python tools/update_stars.py || true
+          python scripts/update_stars_rest.py
 
       - name: Commit stars changes (optional)
         if: ${{ env.GITEE_TOKEN != '' }}
