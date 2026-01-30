@@ -1,6 +1,83 @@
 {
   "papers": [
     {
+      "title": "随机环境的分布式价值梯度",
+      "authors": "Unknown",
+      "year": 2026,
+      "venue": "arXiv",
+      "citations": 0,
+      "url": "http://arxiv.org/abs/2601.20071v1",
+      "description": "将“回报分布”而非期望回报纳入梯度学习，有利于风险敏感决策；映射到空间智能可用于灾害应急调度、无人系统路径规划等需要“尾部风险控制”的任务。",
+      "task": [],
+      "publisher": "Unknown"
+    },
+    {
+      "title": "多变量空间与时空协方差中的反射不对称性连接",
+      "authors": "Unknown",
+      "year": 2026,
+      "venue": "arXiv",
+      "citations": 0,
+      "url": "http://arxiv.org/abs/2601.20132v1",
+      "description": "明确建模空间/时空依赖的方向性与不对称性，可提升风场、污染扩散、交通流等“非对称传播过程”的统计建模质量，为 GeoAI 的不确定性量化打基础。",
+      "task": [],
+      "publisher": "Unknown"
+    },
+    {
+      "title": "物理信息深度学习连接大地测量数据与断层摩擦",
+      "authors": "Unknown",
+      "year": 2026,
+      "venue": "arXiv",
+      "citations": 0,
+      "url": "http://arxiv.org/abs/2601.20136v1",
+      "description": "用物理约束把 GNSS/InSAR 观测与断层摩擦参数同化，能把“拟合观测”升级为“可解释的机制参数反演”，对地震风险评估与情景模拟价值更高。",
+      "task": [],
+      "publisher": "Unknown"
+    },
+    {
+      "title": "面向智能城市公园建设监测：LLM Agent 的多模态融合与分析",
+      "authors": "Unknown",
+      "year": 2026,
+      "venue": "arXiv",
+      "citations": 0,
+      "url": "http://arxiv.org/abs/2601.20206v1",
+      "description": "以 Agent 将遥感、文本、统计与规划资料编排到同一分析链路，代表“城市治理数字孪生”从单模型识别转向“多源证据汇聚+可追溯结论”的范式。",
+      "task": [],
+      "publisher": "Unknown"
+    },
+    {
+      "title": "PathWise：通过世界模型规划的自动启发式设计（自进化 LLM）",
+      "authors": "Unknown",
+      "year": 2026,
+      "venue": "arXiv",
+      "citations": 0,
+      "url": "http://arxiv.org/abs/2601.20539v1",
+      "description": "将“世界模型中的规划”用于组合优化启发式生成，提示 GeoAI 的路线规划、设施选址、应急调度等问题可用同类框架实现“策略自动发现+自我进化”的闭环。",
+      "task": [],
+      "publisher": "Unknown"
+    },
+    {
+      "title": "推进开源世界模型：LingBot-World",
+      "authors": "Unknown",
+      "year": 2026,
+      "venue": "arXiv",
+      "citations": 0,
+      "url": "http://arxiv.org/abs/2601.20540v1",
+      "description": "把“视频生成”提升为“可复用的世界模拟器”资产：如果其提供可控性、状态持久化与评测基准，将成为机器人与空间智能做规划/反事实推演的关键基础设施。",
+      "task": [],
+      "publisher": "Unknown"
+    },
+    {
+      "title": "遥感视觉语言模型的双模态文本提示学习",
+      "authors": "Unknown",
+      "year": 2026,
+      "venue": "arXiv",
+      "citations": 0,
+      "url": "http://arxiv.org/abs/2601.20675v1",
+      "description": "将“文本提示”做成可学习且双模态的适配器，有望在少样本场景下显著提升 CLIP 类 VLM 对跨地区/跨季节遥感影像的可迁移性，并降低对昂贵标注的依赖。",
+      "task": [],
+      "publisher": "Unknown"
+    },
+    {
       "title": "灾害洞察：面向功能感知与可落地灾害评估的多模态基准",
       "authors": "Unknown",
       "year": 2026,
