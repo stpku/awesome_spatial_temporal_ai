@@ -16,60 +16,83 @@ import urllib.error
 import urllib.parse
 import ssl
 from pathlib import Path
+import sys
 
-TIMEOUT = 6
-MAX_WORKERS = 16
-DATA_DIR = Path("awesomelist")
-REPORTS_DIR = Path("docs") / "reports"
+# Import from src.core (Phase 3 migration)
+sys.path.insert(0, str(Path(__file__).parent.parent))
+from src.core.config import Config
+from src.core.logger import Logger
 
-# Some domains tend to block bots or have frequent transient failures; treat as soft-fail
-SOFT_FAIL_DOMAINS = {
-    "ieeexplore.ieee.org",
-    "mdpi.com",
-    "elsevier.com",
-    "springer.com",
-}
+logger = Logger()
 
-def ensure_dirs():
-    REPORTS_DIR.mkdir(parents=True, exist_ok=True)
+# Use Config for all settings
+TIMEOUT = Config.LINK_CHECK_TIMEOUT
+MAX_WORKERS = Config.MAX_WORKERS
+DATA_DIR = Config.DATA_DIR
+REPORTS_DIR = Config.REPORTS_DIR
+SOFT_FAIL_DOMAINS = Config.SOFT_FAIL_DOMAINS
+
+ensure_dirs = Config.ensure_report_dirs
 
 
 def iter_links():
+    """Iterate over all URLs in awesomelist JSON files."""
     files = [
         ("github_projects.json", "project", lambda d: d.get("categories", []), lambda c: c.get("projects", []), "name"),
         ("latest_projects.json", "latest", lambda d: [d.get("spatial_intelligence", []), d.get("world_models", [])], lambda s: s, "name"),
-        ("conferences.json", "conference", lambda d: d.get("conferences", []), lambda s: s, "name"),
-        ("journals.json", "journal", lambda d: d.get("international", []) + d.get("chinese", []), lambda s: s, "name"),
-        ("datasets.json", "dataset", lambda d: d.get("datasets", []), lambda s: s, "name"),
-        ("media_channels.json", "media", lambda d: d.get("wechat_publications", []) + d.get("newsletters", []), lambda s: s, "name"),
-        ("papers.json", "paper", lambda d: d.get("papers", []), lambda s: s, "title"),
+        ("conferences.json", "conference", lambda d: d.get("conferences", [])),
+        ("journals.json", "journal", lambda d: d.get("international", []) + d.get("chinese", [])),
+        ("datasets.json", "dataset", lambda d: d.get("datasets", [])),
+        ("media_channels.json", "media", lambda d: d.get("wechat_publications", []) + d.get("newsletters", [])),
+        ("papers.json", "paper", lambda d: d.get("papers", [])),
     ]
 
-    for filename, kind, root_fn, list_fn, name_field in files:
-        path = DATA_DIR / filename
-        if not path.exists():
-            continue
-        try:
-            data = json.loads(path.read_text(encoding="utf-8"))
-        except Exception:
-            continue
+    for file_info in files:
+        if len(file_info) == 5:
+            # Nested structure (github_projects, latest_projects)
+            filename, kind, root_fn, list_fn, name_field = file_info
+            path = DATA_DIR / filename
+            if not path.exists():
+                continue
+            try:
+                data = json.loads(path.read_text(encoding="utf-8"))
+            except Exception:
+                continue
 
-        roots = root_fn(data)
-        if isinstance(roots, list) and roots and not isinstance(roots[0], dict):
-            # for latest_projects where roots is [list1, list2]
-            for sub in roots:
-                for item in list_fn(sub):
-                    url = item.get("url")
-                    name = item.get(name_field, "")
-                    if isinstance(url, str) and url.startswith(("http://", "https://")):
-                        yield filename, kind, name, url
+            roots = root_fn(data)
+            if isinstance(roots, list) and roots and not isinstance(roots[0], dict):
+                # for latest_projects where roots is [list1, list2]
+                for sub in roots:
+                    for item in list_fn(sub):
+                        url = item.get("url")
+                        name = item.get(name_field, "")
+                        if isinstance(url, str) and url.startswith(("http://", "https://")):
+                            yield filename, kind, name, url
+            else:
+                for root in roots:
+                    for item in list_fn(root):
+                        url = item.get("url")
+                        name = item.get(name_field, "")
+                        if isinstance(url, str) and url.startswith(("http://", "https://")):
+                            yield filename, kind, name, url
         else:
-            for root in roots:
-                for item in list_fn(root if isinstance(root, dict) else roots):
-                    url = item.get("url")
-                    name = item.get(name_field, "")
-                    if isinstance(url, str) and url.startswith(("http://", "https://")):
-                        yield filename, kind, name, url
+            # Flat structure (conferences, journals, datasets, media_channels, papers)
+            filename, kind, items_fn = file_info
+            path = DATA_DIR / filename
+            if not path.exists():
+                continue
+            try:
+                data = json.loads(path.read_text(encoding="utf-8"))
+            except Exception:
+                continue
+
+            items = items_fn(data)
+            name_field = "title" if kind == "paper" else "name"
+            for item in items:
+                url = item.get("url")
+                name = item.get(name_field, "")
+                if isinstance(url, str) and url.startswith(("http://", "https://")):
+                    yield filename, kind, name, url
 
 
 def check_url(url: str):

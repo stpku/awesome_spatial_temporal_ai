@@ -11,21 +11,29 @@ Outputs:
 """
 
 import json
-import os
 from pathlib import Path
 from datetime import datetime, timedelta
 
-DATA_DIR = Path("awesomelist")
-REPORTS_DIR = Path("docs") / "reports"
-BADGES_DIR = REPORTS_DIR / "badges"
+# Import from src.core (Phase 3 migration)
+import sys
+sys.path.insert(0, str(Path(__file__).parent.parent))
+from src.core.config import Config
+from src.core.io import load_json, save_json
+from src.core.logger import Logger
+
+logger = Logger()
+
+# Use Config for paths
+DATA_DIR = Config.DATA_DIR
+REPORTS_DIR = Config.REPORTS_DIR
+BADGES_DIR = Config.BADGES_DIR
+
+ensure_dirs = Config.ensure_report_dirs  # Reuse Config method
 
 
-def load_json(path: Path):
-    try:
-        with path.open(encoding="utf-8") as f:
-            return json.load(f)
-    except Exception:
-        return None
+# Backward compatibility: keep load_json signature
+def load_json_compat(path: Path):
+    return load_json(path)
 
 
 def count_projects(data):
@@ -99,17 +107,12 @@ def compute_stale_and_latest(projects_data):
 
 
 def read_broken_links():
-    data = load_json(REPORTS_DIR / "broken_links.json")
+    data = load_json_compat(REPORTS_DIR / "broken_links.json")
     if not data:
         return 0, 0
     total = int(data.get("total_checked", 0))
     broken = int(data.get("broken_count", 0))
     return total, broken
-
-
-def ensure_dirs():
-    BADGES_DIR.mkdir(parents=True, exist_ok=True)
-    REPORTS_DIR.mkdir(parents=True, exist_ok=True)
 
 
 def write_summary(summary):
@@ -188,13 +191,13 @@ def write_badges(summary):
 def main():
     ensure_dirs()
 
-    projects = load_json(DATA_DIR / "github_projects.json")
-    latest = load_json(DATA_DIR / "latest_projects.json")
-    conferences = load_json(DATA_DIR / "conferences.json")
-    journals = load_json(DATA_DIR / "journals.json")
-    datasets = load_json(DATA_DIR / "datasets.json")
-    media = load_json(DATA_DIR / "media_channels.json")
-    papers = load_json(DATA_DIR / "papers.json")
+    projects = load_json_compat(DATA_DIR / "github_projects.json")
+    latest = load_json_compat(DATA_DIR / "latest_projects.json")
+    conferences = load_json_compat(DATA_DIR / "conferences.json")
+    journals = load_json_compat(DATA_DIR / "journals.json")
+    datasets = load_json_compat(DATA_DIR / "datasets.json")
+    media = load_json_compat(DATA_DIR / "media_channels.json")
+    papers = load_json_compat(DATA_DIR / "papers.json")
 
     totals = {
         "projects": count_projects(projects),
